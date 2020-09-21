@@ -55,7 +55,7 @@ class LoginForm extends Component {
 
 				<div className="form-wrapper">
 					<form className="form" onSubmit={this.handleSubmit}>
-						<div className="jumbotron">
+						<div className="p-4 bg-light">
 							username: admin@admin.com
 							<br />
 							password: secret
