@@ -19,7 +19,7 @@ class ReviewForm extends Component {
 
 	handleValidation = (data) => {
 		let errors = {};
-		const emailRegex = /^([a-zA-Z0-9_-.]+)@([a-zA-Z0-9_-.]+)\.([a-zA-Z]{2,5})$/;
+		const emailRegex = /^[a-zA-Z0-9_-.]+@[a-zA-Z0-9_-.]+[a-zA-Z]{2,5}$/;
 		if (!data.firstname) errors.firstname = "Enter your firstname";
 		if (!data.lastname) errors.lastname = "Enter your lastname";
 		if (!data.email) errors.email = "Enter your email";
