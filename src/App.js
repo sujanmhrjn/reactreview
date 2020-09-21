@@ -8,7 +8,7 @@ import store from "./redux/store";
 import fb from "./config/firebase";
 import { createFirestoreInstance } from "redux-firestore";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
-import { isLoaded } from "react-redux-firebase";
+// import { isLoaded } from "react-redux-firebase";
 const rrfConfig = { userProfile: "users" };
 const rrfProps = {
 	firebase: fb,
