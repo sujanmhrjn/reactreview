@@ -1,0 +1,26 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body {
+	color: $textColor;
+}
+header,
+footer,
+section,
+aside,
+article {
+	display: block;
+}
+
+a {
+	text-decoration: none;
+}
+
+.flex {
+	display: flex;
+}
+.items-center {
+	align-items: center;
+}

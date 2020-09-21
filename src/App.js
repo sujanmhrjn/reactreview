@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import ReviewRoutes from "./routes";
+import { BrowserRouter as Router } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import fb from "./config/firebase";
+import { createFirestoreInstance } from "redux-firestore";
+import { ReactReduxFirebaseProvider } from "react-redux-firebase";
+import { isLoaded } from "react-redux-firebase";
+const rrfConfig = { userProfile: "users" };
+const rrfProps = {
+	firebase: fb,
+	config: rrfConfig,
+	dispatch: store.dispatch,
+	createFirestoreInstance, // <- needed if using firestore
+};
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<Provider store={store}>
+			<ReactReduxFirebaseProvider {...rrfProps}>
+				<Router>
+					<ToastContainer />
+					<ReviewRoutes />
+				</Router>
+			</ReactReduxFirebaseProvider>
+		</Provider>
+	);
 }
 
 export default App;
