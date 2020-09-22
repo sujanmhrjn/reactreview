@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-
+import { withRouter } from "react-router-dom";
 import { IoMdStar, IoMdStarOutline } from "react-icons/io";
 
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { changeViewed } from "../../redux/actions";
 
-const FeedbackList = ({ reviews, handleClick, toggleViewed }) => {
+const FeedbackList = ({ reviews, toggleViewed, history }) => {
 	const [feedbacks, setFeedbacks] = useState(null);
 	useEffect(() => {
 		setFeedbacks(reviews);
 	}, [reviews]);
 	const handleFeedbackClick = (id) => {
 		const selected = feedbacks.filter((item) => item.id === id);
-		handleClick(selected[0]);
+
 		!selected[0].viewed && toggleViewed(selected[0]);
 		setFeedbacks(
 			feedbacks.map((item) =>
 				item.id === id ? { ...item, viewed: true } : item
 			)
 		);
+		history.push(`/dashboard/review/${id}`);
 	};
 
 	return (
@@ -58,14 +59,9 @@ const FeedbackList = ({ reviews, handleClick, toggleViewed }) => {
 	);
 };
 
-// function mapStateToProps(state) {
-// 	return {
-// 		reviews: state.reviewState,
-// 	};
-// }
 const mapStateToProps = (state) => {
 	const reviews = state.firestore.ordered.reviews;
-	console.log(reviews);
+
 	return {
 		reviews,
 		uid: state.firebase.auth.uid,
@@ -86,4 +82,4 @@ export default compose(
 			orderBy: ["date", "desc"],
 		},
 	])
-)(FeedbackList);
+)(withRouter(FeedbackList));
